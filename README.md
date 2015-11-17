@@ -1,4 +1,4 @@
-# gameCanvasProject
+# Canvas-Game-Constructor
 Projeto construtor de mapas para jogos em desenvolvimento
 
 
