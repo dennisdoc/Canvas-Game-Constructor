@@ -4,7 +4,7 @@ Projeto construtor de mapas para jogos em desenvolvimento
 Usando eventos de mouse, teclas de teclado
 
 
-objetivo: disponibilizar mobile e browser desktop ligados.
+objetivo: disponibilizar mobile e browser desktop interligados.
 
 
 frameworks usados:
@@ -17,4 +17,4 @@ maven
 spring mvc
 
 
-v alpha 1.0
+versão alpha 1.0
