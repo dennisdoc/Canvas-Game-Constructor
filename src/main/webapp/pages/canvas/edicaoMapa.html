@@ -1,0 +1,153 @@
+<div align="center" class="conteudo edicaoMapaModal">
+		<div align="center" class="row" >
+		  <div class="canvas-menu col-md-1" >
+		  	<a class="link-menu" ng-click="saveMap()" >
+		  		<span class="fa fa-save" ></span>
+		  	</a>
+		  	<a class="link-menu" ng-click="newMap(mapatitulo)" >
+		  		<span class="fa fa-plus" ></span>
+		  	</a>
+		  	<a ng-show="playing" class="link-menu" ng-click="pause()" >
+		  		<span class="fa fa-pause" ></span>
+		  	</a>
+		  	<a ng-show="!playing" class="link-menu" ng-click="play()" >
+		  		<span class="fa fa-play" ></span>
+		  	</a>
+		  </div>
+		  	
+		  	<audio id="audio" src="./ballGame/music/mario.mp3"></audio>
+		  <div align="center" class="col-md-3" >
+		  	<div class="canvas-menu mouse-items" ng-model="selectMouseLeft" >
+		  		<div ng-click="setMouseLeft(item)" align="center" style="background-color:{{item.colour}}" class="itemPicker" ng-repeat="item in map.keys" value="{{item}}">
+					<div ng-show="item.colour!='Transparent' && item.colour!='picker-1' && item.img!=null" >
+						<img class="img-picker" src="{{item.img}}" >
+					</div>
+					<div ng-show="item.colour=='Transparent'" >
+						<span style="font-size:25px;display:block;" class="fa fa-eraser" ></span>
+					</div>
+					<div ng-show="item.colour=='picker-1'" >
+						<span style="display:block;font-size:12px;" >{{st}}</span>
+					</div>
+				</div>
+		  	</div>
+		  	<div class="canvas-menu mouse-items" ng-model="selectMouseRight" >
+		  		<div ng-click="setMouseRight(item)" align="center" style="background-color:{{item.colour}}" class="itemPicker" ng-repeat="item in map.keys" value="{{item}}">
+					<div ng-show="item.colour!='Transparent' && item.colour!='picker-1' && item.img!=null" >
+						<img class="img-picker" src="{{item.img}}" >
+					</div>
+					<div ng-show="item.colour=='Transparent'" >
+						<span style="font-size:25px;display:block;" class="fa fa-eraser" ></span>
+					</div>
+					<div ng-show="item.colour=='picker-1'" >
+						<span style="display:block;font-size:12px;" >{{st}}</span>
+					</div>
+				</div>
+		  	</div>
+		  </div>
+			<div align="center" class="col-md-8" >
+			<form action="" method="POST" class="canvas-form bs-component" role="form">
+
+				<div class="form-group">
+					<input type="color" ng-model="st" id="st" /> 
+						<label class="md-only" for="st">Picker<code>{{st}}</code></label>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="canvasFormLabel" >
+							Mouse Left:
+							</div>
+						</div>
+						<div class="col-md-8">
+							<div class="btn-group">
+							    <a ng-model="selectMouseLeft" class="btn btn-default dropdown-toggle row" data-toggle="dropdown">
+							    	<div class="div-inline" ng-show="selectMouseLeft.colour!='Transparent' && selectMouseLerft.colour!='picker-1' && selectMouseLeft.img!=null" >
+							    		<img class="img-select" src="{{selectMouseLeft.img}}" >
+							    	</div>
+							       {{selectMouseLeft.id}} {{selectMouseLeft.descricao}} {{selectMouseLeft.colour}} solid= {{selectMouseLeft.solid==1 ? 'Sim':'Não'}}
+							       <span class="caret"></span>
+							     </a>
+							     <ul class="dropdown-menu" >
+							     	<li ng-repeat="item in map.keys" >
+								     	<a ng-click="setMouseLeft(item)" class="row no-margin" >
+								     	<div class="col-md-1 no-pad">
+									     	<div class="div-inline" ng-show="item.colour!='Transparent' && item.colour!='picker-1' && item.img!=null" >
+									     		<img class="img-select" src="{{item.img}}" >
+									     	</div>
+								     	</div>
+								     	<div style="white-space: normal;" class="col-md-11 no-pad">
+								     		{{item.id}} {{item.descricao}} {{item.colour}} solid= {{item.solid==1 ? 'Sim':'Não'}}
+								     	</div>
+								     	</a>
+							     	</li>
+							     </ul>
+						     </div>
+						</div>
+						<div class="col-md-4">
+							<div class="canvasFormLabel" >
+							Mouse Right:
+							</div>
+						</div>
+						<div class="col-md-8">
+							 <div class="btn-group">
+						            <a ng-model="selectMouseLeft" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+						               {{selectMouseRight.id}} {{selectMouseRight.descricao}} {{selectMouseRight.colour}} solid= {{selectMouseRight.solid==1 ? 'Sim':'Não'}}
+						                <span class="caret"></span>
+						            </a>
+						            <ul class="dropdown-menu" >
+						                <li ng-repeat="item in map.keys" ><a ng-click="setMouseRight(item)" >{{item.id}} {{item.descricao}} {{item.colour}} solid= {{item.solid==1 ? 'Sim':'Não'}}</a></li>
+						            </ul>
+						        </div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							block 2:
+							 <select class="form-control" ng-model="color2" >
+								  <option ng-repeat="color in mapColors" value="{{color}}">
+								  	{{color}}
+								  </option>
+							</select>
+						</div>
+						<div class="col-md-4">
+							<div class="canvasFormLabel" >
+							Map:
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="btn-group">
+						            <a ng-model="mapSelected" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+						                {{mapSelected}}
+						                <span class="caret"></span>
+						            </a>
+						            <ul class="dropdown-menu" >
+						                <li ng-repeat="map in maps" ><a ng-click="setMapSelected(map._id)" >{{map._id}}</a></li>
+						            </ul>
+						        </div>
+							<button ng-click="updateMaps()" class="btn btn-xs btn-primary" type="button" >
+								<span class="glyphicon glyphicon-refresh" ></span>
+							</button>
+						</div>
+					</div>
+					<div style="margin-top:15px;" class="row">
+						<div class="col-md-12">
+							<button ng-click="saveMap()" type="button" class="btn btn-primary">Salvar Map</button>
+						</div>
+					</div>
+					<div style="margin-top:15px;" class="row">
+						<div style="margin-left:20px;padding-left:20px;" class="col-md-12" >
+							<div class="form-control-wrapper">
+								<input class="form-control" ng-class="mapatitulo=='' ? 'empty':'' " ng-model="mapatitulo" type="text" />
+								<div class="floating-label">Nome do Mapa</div>
+								<span class="material-input"></span>
+							</div>
+						</div>
+					</div>
+					<div style="margin-top:15px;" class="row">
+						<div class="col-md-12">
+							<button ng-click="newMap(mapatitulo)" type="button" class="btn btn-primary">Novo Map</button>
+						</div>
+					</div>
+				</div>
+			</form>
+			</div>
+		</div>
+	</div>
